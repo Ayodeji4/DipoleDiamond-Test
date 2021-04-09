@@ -1,0 +1,99 @@
+
+09.04.2021 
+dipoleDIAMOND Training School 
+- RPA Track - 
+Applicants Technical Test 
+ 
+INSTRUCTIONS 
+Attempt any two (2) questions. 
+Attempt both either in JavaScript or in C#. 
+Upload the solution/code for a given question to a repo in your GitHub account you have 
+created for that question. 
+Deadline for submission is on or before C-O-B today (i.e. 5 PM WAT); any submission or repo 
+change made after the deadline will not be accepted or considered. 
+To submit, reply to the email message you received for this test and ensure you add the 
+URLs of your GitHub repos in the body of the mail message.. Please copy 
+training@dipolediamond.com in your mail. 
+ 
+QUESTIONS 
+1.Given an input array of numbers arranged in (any number of) rows and columns, write 
+a function to find any element in the array that is zero, and then replace the entire row 
+and column where that zero is located with zeros. 
+ 
+Example 
+1 2 3 4 
+5 6 7 8 
+9 10 0 11 
+12 13 14 15 
+Output 
+  1 2 0 4 
+  5 6 0 8 
+  0 0 0 0 
+12 13 0 15 
+
+ Solution
+-----------
+let replaceRowCol = (matrix, trg=0, val=0) => {
+  
+  // Store width and height of matrix
+  let w = matrix.length;
+  let h = matrix[0].length;
+  
+  // A linked list
+  let replaceX = new Set();
+  let replaceY = new Set();
+  
+  // Any coord whose value is `trg` results in a replacement at that coord
+  for (let x = 0; x < w; x++) { for (let y = 0; y < h; y++) {
+    if (matrix[x][y] === trg) {
+      replaceX.add(x);
+      replaceY.add(y);
+    }
+  }}
+  
+  // Perform all replacements
+  for (let x of replaceX) for (let y = 0; y < h; y++) matrix[x][y] = val;
+  for (let y of replaceY) for (let x = 0; x < w; x++) matrix[x][y] = val;
+  
+  return matrix;
+  
+};
+
+let matrix = replaceRowCol([
+  [ 0, 2, 3, 4, 5, 6 ],
+  [ 1, 2, 3, 4, 5, 6 ],
+  [ 1, 2, 3, 4, 5, 6 ],
+  [ 1, 2, 3, 0, 5, 6 ],
+  [ 1, 2, 3, 4, 5, 6 ]
+]);
+
+for (let row of matrix) console.log(row.join(' '));
+ 
+
+
+3.Given an array of 0's and 1's, write a function to find the maximum consecutive 1's in 
+the input array. 
+ 
+Examples 
+For 11000010001 the output is 1 i.e. Maximum number of consecutive 1's is 1 
+For 00110001001110 the output is 3 i.e. Maximum number of consecutive 1's is 3 
+writer.editor.GO_TO_TOP
+
+Solution
+------------
+var findMaxConsecutiveOnes = function(nums) {
+    let largestCount = 0;
+    let currentCount = 0;
+    for (let i = 0; i<nums.length; i++) {
+        if (nums[i] === 0) {
+            currentCount = 0;
+        } else {
+            currentCount++;
+        };
+        if (currentCount > largestCount) largestCount = currentCount;
+    };
+    return largestCount;
+};
+
+ 
+ 
